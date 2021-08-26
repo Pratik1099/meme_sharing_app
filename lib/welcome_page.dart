@@ -44,7 +44,7 @@ class _chooseMemeState extends State<chooseMeme> {
               ),
               FlatButton(
                 onPressed: () {
-                  memeType = 'memes';
+                  memeType = 'wholesomememes';
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => MyHomePage()));
                 },
