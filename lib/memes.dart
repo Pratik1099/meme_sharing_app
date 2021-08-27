@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meme_sharing/main.dart';
 import 'api_class.dart';
+import 'package:share/share.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -8,10 +10,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future futureAlbum;
+  String shareMeme;
   @override
   void initState() {
     super.initState();
     futureAlbum = getMemeData();
+  }
+
+  void _shareContent() {
+    Share.share(shareMeme);
   }
 
   @override
@@ -28,10 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
               future: getMemeData(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text('nhnhnh');
-                  // return Image(
-                  //   image: NetworkImage(snapshot.data.ur),
-                  // );
+                  shareMeme = snapshot.data.ur;
+                  return Image(
+                    image: NetworkImage(snapshot.data.ur),
+                  );
                 } else
                   return Text('${snapshot.error}');
               },
@@ -40,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: _shareContent,
                   child: Text('Share'),
                   color: Colors.blue,
                 ),
